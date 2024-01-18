@@ -22,8 +22,15 @@ public class StringOps {
     //////                                               ///////
     ////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        String test = "  two   Two   ";
-        System.out.println(camelCase(test));
+        String test = "MMMM";
+        //System.out.println(test.length());
+       int [] array = allIndexOf(test,'M');
+       int i=0;
+       while(i<array.length)
+       {
+        System.out.println(array[i]);
+        i++;
+       }
         //System.out.println(test.length());
     //    System.out.println( lowerCase('a'));
     //    System.out.println( upperCase('W'));
@@ -121,18 +128,18 @@ public class StringOps {
         return i;
     }
 
-    public static String removeExtraWhiteSpaces (String s)
-    {
-        String s2 = "";
-        int i=0;
-        while(i < s.length())
-        {
-            if(s.charAt(i)!= ' ')
-                s2+= s.charAt(i);
-            i++;
-        }
-        return s2;
-    }
+    // public static String removeExtraWhiteSpaces (String s)
+    // {
+    //     String s2 = "";
+    //     int i=0;
+    //     while(i < s.length())
+    //     {
+    //         if(s.charAt(i)!= ' ')
+    //             s2+= s.charAt(i);
+    //         i++;
+    //     }
+    //     return s2;
+    // }
     public static String camelCase (String string) {
         int j=0;
         while(string.charAt(j)== ' ')
@@ -170,7 +177,28 @@ public class StringOps {
     }
 
     public static int[] allIndexOf (String string, char chr) {
-        // Write your code here:
-        return new int[1];
+
+        int count =0;
+        for(int i=0; i< string.length(); i++)
+        {  
+           // System.out.println("first loop " + i);
+            if(string.charAt(i) == chr)
+                count++;
+          
+        }
+        int [] array = new int[count];
+        int arrayIndex = 0;
+        int i =0;
+        while(i < string.length() && arrayIndex != array.length)
+        {
+            //System.out.println("second loop " + i);
+            if(string.charAt(i)== chr)
+            {
+                array[arrayIndex] = i;
+                arrayIndex++;
+            }
+            i++;
+        }
+        return array;
     }
 }
