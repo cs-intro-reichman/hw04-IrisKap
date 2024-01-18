@@ -22,9 +22,9 @@ public class StringOps {
     //////                                               ///////
     ////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-        String test = "   First tWo wordS";
+        String test = "  two   Two   ";
         System.out.println(camelCase(test));
-    //    System.out.println( lowerCase('W'));
+        //System.out.println(test.length());
     //    System.out.println( lowerCase('a'));
     //    System.out.println( upperCase('W'));
     //    System.out.println( upperCase('a'));
@@ -104,13 +104,35 @@ public class StringOps {
     public static int nextWhiteSpace (String string)
     {
         int i=0;
-        while(string.charAt(i)!= ' ' && i != string.length()-1)
+        while(string.length() !=0 && string.charAt(i)!= ' ' && i != string.length()-1)
         {
             i++;
         }
         return i;
     }
 
+    public static int AmountWhiteSpace (String string)
+    {
+        int i=0;
+        while(string.length()!= 0 && string.charAt(i)== ' ' && i != string.length()-1)
+        {
+            i++;
+        }
+        return i;
+    }
+
+    public static String removeExtraWhiteSpaces (String s)
+    {
+        String s2 = "";
+        int i=0;
+        while(i < s.length())
+        {
+            if(s.charAt(i)!= ' ')
+                s2+= s.charAt(i);
+            i++;
+        }
+        return s2;
+    }
     public static String camelCase (String string) {
         int j=0;
         while(string.charAt(j)== ' ')
@@ -128,10 +150,13 @@ public class StringOps {
         int nextWhiteSpace = firstWhiteSpace;
 
         while(nextWhiteSpace!= string.length()-1)
-        {
-            newString+= upperCase(string.charAt(nextWhiteSpace+1));
-            int tempIndex = nextWhiteSpace +2;
-            nextWhiteSpace += nextWhiteSpace(string.substring(nextWhiteSpace+2)) +2;
+        {   
+            int whiteSpaces = AmountWhiteSpace(string.substring(nextWhiteSpace));
+            // if(nextWhiteSpace + whiteSpaces == string.length())
+            //     break;
+            newString+= upperCase(string.charAt(nextWhiteSpace + whiteSpaces));
+            int tempIndex = nextWhiteSpace +whiteSpaces +1;
+            nextWhiteSpace += nextWhiteSpace(string.substring(nextWhiteSpace + whiteSpaces)) +whiteSpaces;
             i = tempIndex;
             while(i<nextWhiteSpace)
             {
